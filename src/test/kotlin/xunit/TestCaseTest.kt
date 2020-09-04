@@ -1,5 +1,6 @@
 package xunit
 
+import io.kotlintest.matchers.string.shouldContain
 import io.kotlintest.shouldBe
 import org.junit.Test
 
@@ -22,7 +23,7 @@ class TestCaseTest(name: String): TestCase(name) {
         result.summary() shouldBe "1 run, 0 failed"
     }
 
-    fun testFailedResult() {
+    fun testBrokenMethod() {
         val test = WasRun("testBrokenMethod")
         val result = TestResult()
         test.run(result)
@@ -54,21 +55,18 @@ class TestCaseTest(name: String): TestCase(name) {
 class Tests {
     @Test
     fun testTemplateMethod() {
-        TestCaseTest("testTemplateMethod").run(TestResult())
-    }
+        val result = TestResult()
+        val suite = TestSuite()
+        suite.add(TestCaseTest("testTemplateMethod"))
+        suite.add(TestCaseTest("testResult"))
+        suite.add(TestCaseTest("testFailedResultFormatting"))
+        suite.add(TestCaseTest("testBrokenMethod"))
+        suite.add(TestCaseTest("testSuite"))
 
-    @Test
-    fun testResult() {
-        TestCaseTest("testResult").run(TestResult())
-    }
+        suite.run(result)
 
-    @Test
-    fun testBrokenMethod() {
-        TestCaseTest("testBrokenMethod").run(TestResult())
-    }
+        println(result.summary())
 
-    @Test
-    fun testSuite() {
-        TestCaseTest("testSuite").run(TestResult())
+        result.summary() shouldContain "0 failed"
     }
 }
