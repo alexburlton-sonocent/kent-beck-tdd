@@ -8,6 +8,8 @@ class TestSuite {
     }
 
     fun run(result: TestResult) {
-
+        tests.forEach {
+            it.run(result)
+        }
     }
 }
