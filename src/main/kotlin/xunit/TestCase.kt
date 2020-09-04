@@ -1,8 +1,7 @@
 package xunit
 
-open class TestCase(val name: String) {
-    fun run(): TestResult {
-        val result = TestResult()
+open class TestCase(private val name: String) {
+    fun run(result: TestResult) {
         result.testStarted()
 
         setUp()
@@ -19,8 +18,6 @@ open class TestCase(val name: String) {
         }
 
         tearDown()
-
-        return result
     }
 
     open fun setUp() {}

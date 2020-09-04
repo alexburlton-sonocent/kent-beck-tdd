@@ -9,21 +9,23 @@ class TestCaseTest(name: String): TestCase(name) {
 
     fun testTemplateMethod() {
         val test = WasRun("testMethod")
-        test.run()
+        test.run(TestResult())
 
         test.log shouldBe "setUp testMethod tearDown "
     }
 
     fun testResult() {
         val test = WasRun("testMethod")
-        val result = test.run()
+        val result = TestResult()
+        test.run(result)
 
         result.summary() shouldBe "1 run, 0 failed"
     }
 
     fun testFailedResult() {
         val test = WasRun("testBrokenMethod")
-        val result = test.run()
+        val result = TestResult()
+        test.run(result)
 
         result.summary() shouldBe "1 run, 1 failed"
     }
@@ -51,21 +53,21 @@ class TestCaseTest(name: String): TestCase(name) {
 class Tests {
     @Test
     fun testTemplateMethod() {
-        TestCaseTest("testTemplateMethod").run()
+        TestCaseTest("testTemplateMethod").run(TestResult())
     }
 
     @Test
     fun testResult() {
-        TestCaseTest("testResult").run()
+        TestCaseTest("testResult").run(TestResult())
     }
 
     @Test
     fun testBrokenMethod() {
-        TestCaseTest("testBrokenMethod").run()
+        TestCaseTest("testBrokenMethod").run(TestResult())
     }
 
     @Test
     fun testSuite() {
-        TestCaseTest("testSuite").run()
+        TestCaseTest("testSuite").run(TestResult())
     }
 }
