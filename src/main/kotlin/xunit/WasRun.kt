@@ -9,6 +9,7 @@ class WasRun(name: String): TestCase(name)
     }
 
     fun testBrokenMethod() {
+        log += "testMethod "
         throw Exception("Boom.")
     }
 

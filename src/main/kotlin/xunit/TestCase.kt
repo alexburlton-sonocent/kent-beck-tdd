@@ -9,6 +9,7 @@ open class TestCase(private val name: String) {
         try {
             javaClass.getMethod(name).invoke(this)
         } catch (e: Exception) {
+            println(e.cause?.message)
             result.testFailed()
         }
 

@@ -46,6 +46,12 @@ class TestCaseTest(name: String): TestCase(name) {
         suite.run(result)
         result.summary() shouldBe "2 run, 1 failed"
     }
+
+    fun testTearDownForFailedTests() {
+        val test = WasRun("testBrokenMethod")
+        test.run(result)
+        test.log shouldBe "setUp testMethod tearDown "
+    }
 }
 
 /**
@@ -61,6 +67,7 @@ class Tests {
         suite.add(TestCaseTest("testFailedResultFormatting"))
         suite.add(TestCaseTest("testBrokenMethod"))
         suite.add(TestCaseTest("testSuite"))
+        suite.add(TestCaseTest("testTearDownForFailedTests"))
 
         suite.run(result)
 
