@@ -27,6 +27,14 @@ class TestCaseTest(name: String): TestCase(name) {
 
         result.summary() shouldBe "1 run, 1 failed"
     }
+
+    fun testFailedResultFormatting() {
+        val result = TestResult()
+        result.testStarted()
+        result.testFailed()
+
+        result.summary() shouldBe "1 run, 1 failed"
+    }
 }
 
 /**

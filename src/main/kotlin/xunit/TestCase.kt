@@ -6,7 +6,13 @@ open class TestCase(val name: String) {
         result.testStarted()
 
         setUp()
-        javaClass.getMethod(name).invoke(this)
+
+        try {
+            javaClass.getMethod(name).invoke(this)
+        } catch (e: Exception) {
+            result.testFailed()
+        }
+
         tearDown()
 
         return result
