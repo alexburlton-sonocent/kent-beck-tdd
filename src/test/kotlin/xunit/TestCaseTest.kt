@@ -35,6 +35,14 @@ class TestCaseTest(name: String): TestCase(name) {
 
         result.summary() shouldBe "1 run, 1 failed"
     }
+
+    fun testSuite() {
+        val suite = TestSuite()
+        suite.add(WasRun("testMethod"))
+        suite.add(WasRun("testBrokenMethod"))
+        val result = suite.run()
+        result.summary() shouldBe "2 run, 1 failed"
+    }
 }
 
 /**
@@ -54,5 +62,10 @@ class Tests {
     @Test
     fun testBrokenMethod() {
         TestCaseTest("testBrokenMethod").run()
+    }
+
+    @Test
+    fun testSuite() {
+        TestCaseTest("testSuite").run()
     }
 }
