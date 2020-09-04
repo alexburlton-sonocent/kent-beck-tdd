@@ -5,19 +5,21 @@ import io.kotlintest.shouldBe
 import org.junit.Test
 
 class TestCaseTest(name: String): TestCase(name) {
+    lateinit var result: TestResult
+
     override fun setUp() {
+        result = TestResult()
     }
 
     fun testTemplateMethod() {
         val test = WasRun("testMethod")
-        test.run(TestResult())
+        test.run(result)
 
         test.log shouldBe "setUp testMethod tearDown "
     }
 
     fun testResult() {
         val test = WasRun("testMethod")
-        val result = TestResult()
         test.run(result)
 
         result.summary() shouldBe "1 run, 0 failed"
@@ -25,14 +27,12 @@ class TestCaseTest(name: String): TestCase(name) {
 
     fun testBrokenMethod() {
         val test = WasRun("testBrokenMethod")
-        val result = TestResult()
         test.run(result)
 
         result.summary() shouldBe "1 run, 1 failed"
     }
 
     fun testFailedResultFormatting() {
-        val result = TestResult()
         result.testStarted()
         result.testFailed()
 
@@ -43,7 +43,6 @@ class TestCaseTest(name: String): TestCase(name) {
         val suite = TestSuite()
         suite.add(WasRun("testMethod"))
         suite.add(WasRun("testBrokenMethod"))
-        val result = TestResult()
         suite.run(result)
         result.summary() shouldBe "2 run, 1 failed"
     }
