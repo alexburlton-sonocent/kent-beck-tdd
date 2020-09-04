@@ -7,5 +7,7 @@ class TestSuite {
         tests.add(case)
     }
 
-    fun run() = TestResult()
+    fun run(result: TestResult) {
+
+    }
 }

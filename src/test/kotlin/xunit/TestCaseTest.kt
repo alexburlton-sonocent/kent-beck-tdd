@@ -42,7 +42,8 @@ class TestCaseTest(name: String): TestCase(name) {
         val suite = TestSuite()
         suite.add(WasRun("testMethod"))
         suite.add(WasRun("testBrokenMethod"))
-        val result = suite.run()
+        val result = TestResult()
+        suite.run(result)
         result.summary() shouldBe "2 run, 1 failed"
     }
 }
