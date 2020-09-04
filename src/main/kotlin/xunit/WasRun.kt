@@ -2,15 +2,17 @@ package xunit
 
 class WasRun(name: String): TestCase(name)
 {
-    var wasRun = false
-    var wasSetUp = false
+    var log = ""
 
     fun testMethod() {
-        wasRun = true
+        log += "testMethod "
     }
 
     override fun setUp() {
-        wasRun = false
-        wasSetUp = true
+        log = "setUp "
+    }
+
+    override fun tearDown() {
+        log += "tearDown "
     }
 }

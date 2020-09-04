@@ -4,33 +4,20 @@ import io.kotlintest.shouldBe
 import org.junit.Test
 
 class TestCaseTest(name: String): TestCase(name) {
-    private lateinit var test: WasRun
-
     override fun setUp() {
-        test = WasRun("testMethod")
     }
 
-    fun testRunning() {
-        test.wasRun shouldBe false
-
+    fun testTemplateMethod() {
+        val test = WasRun("testMethod")
         test.run()
-        test.wasRun shouldBe true
-    }
 
-    fun testSetUp() {
-        test.run()
-        test.wasSetUp shouldBe true
+        test.log shouldBe "setUp testMethod tearDown "
     }
 }
 
 class Tests {
     @Test
     fun testRunning() {
-        TestCaseTest("testRunning").run()
-    }
-
-    @Test
-    fun testSetUp() {
-        TestCaseTest("testSetUp").run()
+        TestCaseTest("testTemplateMethod").run()
     }
 }
