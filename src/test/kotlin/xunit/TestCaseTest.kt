@@ -13,11 +13,38 @@ class TestCaseTest(name: String): TestCase(name) {
 
         test.log shouldBe "setUp testMethod tearDown "
     }
+
+    fun testResult() {
+        val test = WasRun("testMethod")
+        val result = test.run()
+
+        result.summary() shouldBe "1 run, 0 failed"
+    }
+
+    fun testFailedResult() {
+        val test = WasRun("testBrokenMethod")
+        val result = test.run()
+
+        result.summary() shouldBe "1 run, 1 failed"
+    }
 }
 
+/**
+ * Actually use JUnit to drive the above methods, like how he's running them from main() in python
+ */
 class Tests {
     @Test
-    fun testRunning() {
+    fun testTemplateMethod() {
         TestCaseTest("testTemplateMethod").run()
+    }
+
+    @Test
+    fun testResult() {
+        TestCaseTest("testResult").run()
+    }
+
+    @Test
+    fun testBrokenMethod() {
+        TestCaseTest("testBrokenMethod").run()
     }
 }
