@@ -57,7 +57,7 @@ class TestCaseTest(name: String): TestCase(name) {
 /**
  * Actually use JUnit to drive the above methods, like how he's running them from main() in python
  */
-class Tests {
+class TestRunner {
     @Test
     fun testTemplateMethod() {
         val result = TestResult()
